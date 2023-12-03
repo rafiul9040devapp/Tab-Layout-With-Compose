@@ -8,13 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
@@ -74,6 +68,9 @@ fun HomeScreen() {
                         .tabIndicatorOffset(tabPositions[selectedTabIndex])
                 )
             },
+            divider = {
+                Divider(thickness = 0.dp, color = MaterialTheme.colorScheme.background)
+            }
         ) {
             tabItems.forEachIndexed { index: Int, tabItem: TabItem ->
 
