@@ -25,7 +25,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.unit.dp
+import com.rafiul.tabcompose.R
 import com.rafiul.tabcompose.model.TabItem
 import com.rafiul.tabcompose.model.tabItems
 
@@ -70,31 +72,34 @@ fun HomeScreen() {
             },
             divider = {
                 Divider(thickness = 0.dp, color = MaterialTheme.colorScheme.background)
+            },
+            tabs = {
+                tabItems.forEachIndexed { index: Int, tabItem: TabItem ->
+                    Tab(
+                        selected = index == selectedTabIndex,
+                        onClick = {
+                            selectedTabIndex = index
+                        },
+                        text = {
+                            Text(
+                                text = tabItem.title,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = tabItem.takeIf { index == selectedTabIndex }?.selectedIcon
+                                    ?: tabItem.unSelectedIcon,
+                                contentDescription = tabItem.title
+                            )
+                        },
+                        selectedContentColor = Color.Green,
+                        unselectedContentColor = Color.White,
+                        modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
+                    )
+                }
             }
-        ) {
-            tabItems.forEachIndexed { index: Int, tabItem: TabItem ->
-
-                Tab(
-                    selected = index == selectedTabIndex,
-                    onClick = {
-                        selectedTabIndex = index
-                    },
-                    text = {
-                        Text(text = tabItem.title, style = MaterialTheme.typography.bodySmall)
-                    },
-                    icon = {
-                        Icon(
-                            imageVector = tabItem.takeIf { index == selectedTabIndex }?.selectedIcon
-                                ?: tabItem.unSelectedIcon,
-                            contentDescription = tabItem.title
-                        )
-                    },
-                    selectedContentColor = Color.Green,
-                    unselectedContentColor = Color.White,
-                    modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
-                )
-            }
-        }
+        )
 
         HorizontalPager(
             state = pagerState,
@@ -106,7 +111,11 @@ fun HomeScreen() {
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = tabItems[page].title, style = MaterialTheme.typography.bodyLarge, color = Color.White)
+                Text(
+                    text = tabItems[page].title,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.White
+                )
             }
 
         }
