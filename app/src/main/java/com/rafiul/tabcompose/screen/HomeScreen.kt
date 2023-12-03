@@ -1,6 +1,7 @@
 package com.rafiul.tabcompose.screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
@@ -71,7 +73,7 @@ fun HomeScreen() {
                     modifier = Modifier
                         .tabIndicatorOffset(tabPositions[selectedTabIndex])
                 )
-            }
+            },
         ) {
             tabItems.forEachIndexed { index: Int, tabItem: TabItem ->
 
@@ -81,7 +83,7 @@ fun HomeScreen() {
                         selectedTabIndex = index
                     },
                     text = {
-                        Text(text = tabItem.title)
+                        Text(text = tabItem.title, style = MaterialTheme.typography.bodySmall)
                     },
                     icon = {
                         Icon(
@@ -91,7 +93,8 @@ fun HomeScreen() {
                         )
                     },
                     selectedContentColor = Color.Green,
-                    unselectedContentColor = Color.White
+                    unselectedContentColor = Color.White,
+                    modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
                 )
             }
         }
@@ -106,7 +109,7 @@ fun HomeScreen() {
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = tabItems[page].title)
+                Text(text = tabItems[page].title, style = MaterialTheme.typography.bodyLarge, color = Color.White)
             }
 
         }
